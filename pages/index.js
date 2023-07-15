@@ -1,4 +1,6 @@
 import Head from 'next/head';
+import Link from 'next/link';
+import Date from '../components/date';
 import Layout, { setTitle } from '../components/layout';
 import utilStyles from '../styles/utils.module.css';
 import { getSortedPostsData } from '../lib/posts';
@@ -30,11 +32,14 @@ export default function Home({ allPostsData }) {
         <ul className={utilStyles.listItem}>
           {allPostsData.map(({ id, date, title }) => (
             <li className={utilStyles.listItem} key={id}>
-              {title}
-              <br />
-              {id}
-              <br />
-              {date}
+              <div>
+                <Link href={`/posts/${id}`}>
+                  {title}
+                </Link>
+              </div>
+              <small>
+                <Date dateString={date}></Date>
+              </small>
             </li>
           ))}
         </ul>
